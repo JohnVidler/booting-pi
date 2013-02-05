@@ -18,11 +18,14 @@ clean :
 vectors.o : vectors.s
 	$(ARMGNU)-as vectors.s -o vectors.o
 
+video.o: video.c
+	$(ARMGNU)-gcc $(COPS) -c video.c -o video.o
+
 booting_pi.o : booting_pi.c
 	$(ARMGNU)-gcc $(COPS) -c booting_pi.c -o booting_pi.o
 
-booting_pi.elf : memmap vectors.o booting_pi.o 
-	$(ARMGNU)-ld vectors.o booting_pi.o -T memmap -o booting_pi.elf
+booting_pi.elf : memmap vectors.o video.o booting_pi.o
+	$(ARMGNU)-ld vectors.o video.o booting_pi.o -T memmap -o booting_pi.elf
 	$(ARMGNU)-objdump -D booting_pi.elf > booting_pi.list
 
 booting_pi.bin : booting_pi.elf
