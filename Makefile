@@ -5,7 +5,7 @@ COPS = -Wall -O2 -nostdlib -nostartfiles -ffreestanding
 
 gcc : booting_pi.hex booting_pi.bin
 
-all : gcc clang
+all : gcc
 
 clean :
 	rm -f *.o
